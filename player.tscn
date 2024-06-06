@@ -1,15 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://scw1wxs8hbhc"]
+[gd_scene load_steps=6 format=3 uid="uid://scw1wxs8hbhc"]
 
 [ext_resource type="PackedScene" uid="uid://dhv1abmm45iom" path="res://3d/KayKit_Adventurers_1.0_FREE/KayKit_Adventurers_1.0_FREE/Characters/gltf/Knight.glb" id="1_324m5"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_estqn"]
+[ext_resource type="PackedScene" uid="uid://cmompsny1ykey" path="res://knight.tscn" id="3_kv0sq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_govug"]
 
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2j3i1"]
+
 [node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_estqn")
 
 [node name="Pivot" type="Node3D" parent="."]
 
 [node name="Knight" parent="Pivot" instance=ExtResource("1_324m5")]
+visible = false
+
+[node name="Knight2" parent="Pivot" instance=ExtResource("3_kv0sq")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.991367, 0)
 shape = SubResource("CapsuleShape3D_govug")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_2j3i1")
